@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const {logger} = require('./middleware/logEvents.js')
+var router = express.Router()
 const PORT = process.env.PORT || 3305;
 
 var con = mysql.createConnection({
@@ -24,6 +25,10 @@ app.post("/table", (req, res) => {
     let Product = (`${req.body.cars}`)
     let Desciption = (`${req.body.owo}`)
     sql = "INSERT INTO products (product, quantity, desciption) VALUES ('"+Product+"','1', '"+Desciption+"')";
+    con.query("SELECT * FROM products ORDER BY product", function (err, result) {
+        if (err) throw err;
+        console.log(result);
+    });
     con.query(sql, function (err, result) {
         if (err) throw err;
         console.log("1 record inserted");
@@ -40,6 +45,14 @@ app.post("/create", (req, res) => {
         console.log("1 record inserted");
   });
 })
+
+con.connect(function(err) {
+  if (err) throw err;
+  let e = con.query("SELECT * FROM products ORDER BY ID", function (err, result, fields) {
+    if (err) throw err;
+    console.log(e);
+  });
+});
 
 
 
