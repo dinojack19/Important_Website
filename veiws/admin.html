@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="css/style.css">
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>found</title>
+</head>
+
+<body>
+
+<form action="/table" method="POST">
+    <label>Last Name</label>
+    <input name="cars">
+    <br>
+    <label>Last Name</label>
+    <input name="owo">
+    <br>
+    <input type="submit" value="Submit">
+
+  </form action="/owo" method="GET">
+     <div class="container mt-4">
+      <% if (messages.success) { %>
+      <p class="alert alert-success mt-4"><%- messages.success %></p>
+      <% } %>
+      <br />
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(data.length){ for(var i = 0; i< data.length; i++) {%>
+          <tr>
+            <th scope="row"><%= (i+1) %></th>
+            <td><%= data[i].name%></td>
+            <td><%= data[i].email%></td>
+          </tr>
+          <% } }else{ %>
+          <tr>
+            <td>No data ever existed.</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+</html>
