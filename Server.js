@@ -3,7 +3,9 @@ const mysql = require('mysql')
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-const {logger} = require('./middleware/logEvents.js')
+const {logger} = require('./middleware/logEvents.js');
+const { appendFileSync } = require('fs');
+const { error } = require('console');
 var router = express.Router()
 const PORT = process.env.PORT || 3305;
 
@@ -14,6 +16,7 @@ var con = mysql.createConnection({
     database: "owo",
 });
 
+app.set('view engine', 'html');
 app.use(express.static("public"));
 app.use(express.json());
 app.use(logger)
@@ -46,11 +49,27 @@ app.post("/create", (req, res) => {
   });
 })
 
-con.connect(function(err) {
-  if (err) throw err;
-  let e = con.query("SELECT * FROM products ORDER BY ID", function (err, result, fields) {
-    if (err) throw err;
-    console.log(e);
+router.get('/owo', function (request, response, next) {
+  var query = 'SELECT * FROM products ORDER BY id desc'
+  database.query = (query, function (err, rows) {
+    if (error) {
+      throw error
+    } else {
+      response.render('admin', { data: rows })
+    }
+  })
+})
+module.exports = router
+app.get('/owo',(req,res)=>
+{ res.sendFile(path.join(__dirname,'veiws','admin.ejs'))
+});
+
+
+app.get('/users', function(req, res) {
+  con.query("SELECT * FROM products ORDER BY ID", function (err, result, fields) {
+    if (err) throw err
+      res.json('users', {title: 'User Details', message: result})
+    console.log(result)
   });
 });
 
