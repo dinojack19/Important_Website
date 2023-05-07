@@ -6,7 +6,11 @@ const bodyParser = require('body-parser');
 const {logger} = require('./middleware/logEvents.js');
 const { appendFileSync } = require('fs');
 const { error } = require('console');
+let data = {};
 var router = express.Router()
+let e = 'SELECT * FROM products ORDER BY id desc'
+data.emplyess = require(e)
+
 const PORT = process.env.PORT || 3305;
 
 var con = mysql.createConnection({
@@ -21,6 +25,11 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(logger)
 app.use(bodyParser.urlencoded({ extended: true })); 
+
+router.route('/owo')
+  .get((req,res) => {
+    res(data.emplyess)
+  })
 
 
 app.post("/table", (req, res) => {
@@ -49,20 +58,7 @@ app.post("/create", (req, res) => {
   });
 })
 
-router.get('/owo', function (request, response, next) {
-  var query = 'SELECT * FROM products ORDER BY id desc'
-  database.query = (query, function (err, rows) {
-    if (error) {
-      throw error
-    } else {
-      response.render('admin', { data: rows })
-    }
-  })
-})
-module.exports = router
-app.get('/owo',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','admin.ejs'))
-});
+
 
 
 app.get('/users', function(req, res) {
