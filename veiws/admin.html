@@ -2,49 +2,34 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-<title>found</title>
-</head>
-
 <body>
+    <main>
+        <label>Name:</label>
+        <input type="text" id="name-input">
+        <button id="add-name-btn">Add Name</button>
 
-<form action="/table" method="POST">
-    <label>Last Name</label>
-    <input name="cars">
-    <br>
-    <label>Last Name</label>
-    <input name="owo">
-    <br>
-    <input type="submit" value="Submit">
+        <br><br><br>
+        <div>
+           <input placeholder="search by name" id="search-input">
+           <button id="search-btn">Search</button>
+        </div>
 
-  </form action="/owo" method="GET">
-     <div class="container mt-4">
-      <% if (messages.success) { %>
-      <p class="alert alert-success mt-4"><%- messages.success %></p>
-      <% } %>
-      <br />
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if(data.length){ for(var i = 0; i< data.length; i++) {%>
-          <tr>
-            <th scope="row"><%= (i+1) %></th>
-            <td><%= data[i].name%></td>
-            <td><%= data[i].email%></td>
-          </tr>
-          <% } }else{ %>
-          <tr>
-            <td>No data ever existed.</td>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
-    </div>
-</html>
+        <table id="table">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date Added</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <section hidden id="update-row">
+            <label>Name:</label>
+            <input type="text" id="update-name-input">
+            <button id="update-row-btn">Update</button>
+        </section>
+    </main>
+    <script src="server.js"></script>
+</body>
