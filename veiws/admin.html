@@ -2,34 +2,24 @@
 <!DOCTYPE html>
 <html>
 
+
 <body>
-    <main>
-        <label>Name:</label>
-        <input type="text" id="name-input">
-        <button id="add-name-btn">Add Name</button>
+    <h4><%= ID[0].ID%> 
+        <%= ID[0].product%> 
+        <%= ID[0].quantity%> 
+        <%= ID[0].desciption%></h4>
+    
+<script >
+    
+    i=0
+    while (i < 6) {
+       document.write(i);
+        i++;
+    }
 
-        <br><br><br>
-        <div>
-           <input placeholder="search by name" id="search-input">
-           <button id="search-btn">Search</button>
-        </div>
+</script>
 
-        <table id="table">
-            <thead>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Date Added</th>
-                <th>Delete</th>
-                <th>Edit</th>
-            </thead>
-            <tbody></tbody>
-        </table>
 
-        <section hidden id="update-row">
-            <label>Name:</label>
-            <input type="text" id="update-name-input">
-            <button id="update-row-btn">Update</button>
-        </section>
-    </main>
-    <script src="server.js"></script>
 </body>
+</html>
+
