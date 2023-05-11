@@ -6,10 +6,8 @@ const bodyParser = require('body-parser');
 const {logger} = require('./middleware/logEvents.js');
 const { appendFileSync } = require('fs');
 const { error } = require('console');
-let data = {};
 var router = express.Router()
-let e = 'SELECT * FROM products ORDER BY id desc'
-data.emplyess = require(e)
+
 
 const PORT = process.env.PORT || 3305;
 
@@ -25,12 +23,16 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(logger)
 app.use(bodyParser.urlencoded({ extended: true })); 
+app.engine('html', require('ejs').renderFile);
 
-router.route('/owo')
-  .get((req,res) => {
-    res(data.emplyess)
-  })
 
+if (typeof window !== 'undefined') {
+  // 👉️ can use document here
+  console.log('You are on the browser')
+
+  console.log(document.title)
+  console.log(document.getElementsByClassName('my-class'));
+}
 
 app.post("/table", (req, res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
@@ -39,13 +41,22 @@ app.post("/table", (req, res) => {
     sql = "INSERT INTO products (product, quantity, desciption) VALUES ('"+Product+"','1', '"+Desciption+"')";
     con.query("SELECT * FROM products ORDER BY product", function (err, result) {
         if (err) throw err;
-        console.log(result);
+        console.log('good');
     });
     con.query(sql, function (err, result) {
         if (err) throw err;
         console.log("1 record inserted");
   });
 })
+
+app.get('/main', function(req, res) {
+  sql = "SELECT * FROM products" ;
+  con.query(sql, function (err, result, next) {
+    let rows = JSON.parse(JSON.stringify(result))  
+    res.render(__dirname + "/veiws/admin.html", {
+      ID: rows });
+  });
+});
 
 app.post("/create", (req, res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
@@ -59,24 +70,12 @@ app.post("/create", (req, res) => {
 })
 
 
-
-
-app.get('/users', function(req, res) {
-  con.query("SELECT * FROM products ORDER BY ID", function (err, result, fields) {
-    if (err) throw err
-      res.json('users', {title: 'User Details', message: result})
-    console.log(result)
-  });
-});
-
-
-
-app.get('/admin',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','admin.html'))
-});
-
 app.get('/',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','index.html'))
+});
+
+app.get('/q',(req,res)=>
+{ res.sendFile(path.join(__dirname,'veiws','test.html'))
 });
 
 app.get('/*', (req,res) => {
