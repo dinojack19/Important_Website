@@ -49,7 +49,7 @@ app.post("/table", (req, res) => {
   });
 })
 
-app.get('/main', function(req, res) {
+app.get('/main', function(req, res)  {
   sql = "SELECT * FROM products" ;
   con.query(sql, function (err, result, next) {
     let rows = JSON.parse(JSON.stringify(result))  
@@ -57,6 +57,7 @@ app.get('/main', function(req, res) {
       ID: rows });
   });
 });
+
 
 app.post("/create", (req, res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
@@ -71,7 +72,7 @@ app.post("/create", (req, res) => {
 
 
 app.get('/',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','index.html'))
+{ res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
 });
 
 app.get('/q',(req,res)=>
