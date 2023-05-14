@@ -75,8 +75,9 @@ app.get('/',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
 });
 
-app.get('/q',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','test.html'))
+
+app.get('ID',(req,res)=>
+{ res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
 });
 
 app.get('/*', (req,res) => {
