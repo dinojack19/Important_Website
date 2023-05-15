@@ -26,14 +26,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('html', require('ejs').renderFile);
 
 
-if (typeof window !== 'undefined') {
-  // 👉️ can use document here
-  console.log('You are on the browser')
-
-  console.log(document.title)
-  console.log(document.getElementsByClassName('my-class'));
-}
-
 app.post("/table", (req, res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
     let Product = (`${req.body.cars}`)
@@ -43,11 +35,7 @@ app.post("/table", (req, res) => {
         if (err) throw err;
         console.log('good');
     });
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted");
-  });
-})
+});
 
 app.get('/main', function(req, res)  {
   sql = "SELECT * FROM products" ;
