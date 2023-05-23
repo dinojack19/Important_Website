@@ -7,6 +7,10 @@ const {logger} = require('./middleware/logEvents.js');
 const { appendFileSync } = require('fs');
 const { error } = require('console');
 var router = express.Router()
+var multer = require('multer');
+var upload = multer({dest:'public/static/'});
+
+
 
 
 const PORT = process.env.PORT || 3305;
@@ -25,19 +29,19 @@ app.use(logger)
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.engine('html', require('ejs').renderFile);
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/static")
+  },
+  filename: function (req, file, cb) {
+    cb(null, "-" + file.originalname)
+  }
+})
 
-app.post("/table", (req, res) => {
-    res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
-    let Product = (`${req.body.cars}`)
-    let Desciption = (`${req.body.owo}`)
-    sql = "INSERT INTO products (product, quantity, desciption) VALUES ('"+Product+"','1', '"+Desciption+"')";
-    con.query("SELECT * FROM products ORDER BY product", function (err, result) {
-        if (err) throw err;
-        console.log('good');
-    });
-});
+var upload = multer({ storage: storage })
 
-app.get('/main', function(req, res)  {
+
+app.get('/admin', function(req, res)  {
   sql = "SELECT * FROM products" ;
   con.query(sql, function (err, result, next) {
     let rows = JSON.parse(JSON.stringify(result))  
@@ -46,6 +50,9 @@ app.get('/main', function(req, res)  {
   });
 });
 
+app.get('/index',(req,res)=>
+{ res.sendFile(path.join(__dirname,'veiws','index.html'))
+});
 
 app.post("/create", (req, res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
@@ -58,19 +65,40 @@ app.post("/create", (req, res) => {
   });
 })
 
+app.post("/img",  upload.single('tomato'), function (req, res, next) {
+  sql = "INSERT INTO profiles (img) VALUES ('"+file+"')";
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
+  });
+})
+
+
 
 app.get('/',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
 });
 
+app.post('/ID',(req,res)=> { 
+  sql = "SELECT * FROM products" ;
+  let data = req.body.shit
+  let number = data -= 1
+  con.query(sql, function (err, result, next) {
+    let e = JSON.parse(JSON.stringify(result))  
+    ID_value = e[number]
+    res.render(__dirname + "/veiws/product.html", {
+      yes: ID_value });
+  });
+})
 
-app.get('ID',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
-});
+
 
 app.get('/*', (req,res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
 });
+
+const url = 'https://www.webmound.com/uploads/26/banner.jpg';
+
 
 app.listen(PORT, () => console.log('server is running'));
 
