@@ -10,9 +10,6 @@ var router = express.Router()
 var multer = require('multer');
 var upload = multer({dest:'public/static/'});
 
-
-
-
 const PORT = process.env.PORT || 3305;
 
 var con = mysql.createConnection({
@@ -54,19 +51,11 @@ app.get('/index',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','index.html'))
 });
 
-app.post("/create", (req, res) => {
+app.post("/create",  upload.single('tomato') ,(req, res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
-    let firstname = (`${req.body.first_name}`)
-    let lastname = (`${req.body.last_name}`)
-    sql = "INSERT INTO profiles (first_name, last_name) VALUES ('"+firstname+"', '"+lastname+"')";
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted");
-  });
-})
-
-app.post("/img",  upload.single('tomato'), function (req, res, next) {
-  sql = "INSERT INTO profiles (img) VALUES ('"+file+"')";
+    let firstname = (`${req.body.product}`)
+    let lastname = (`${req.body.description}`)
+    sql = "INSERT INTO products (product, desciption, img) VALUES ('"+firstname+"', '"+lastname+"', '"+req.file.filename+"')";
     con.query(sql, function (err, result) {
         if (err) throw err;
         console.log("1 record inserted");
