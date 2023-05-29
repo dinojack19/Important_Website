@@ -38,17 +38,22 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 
-app.get('/admin', function(req, res)  {
+app.get('/Product_line', function(req, res)  {
   sql = "SELECT * FROM products" ;
   con.query(sql, function (err, result, next) {
     let rows = JSON.parse(JSON.stringify(result))  
-    res.render(__dirname + "/veiws/admin.html", {
+    res.render(__dirname + "/veiws/Product_line.html", {
       ID: rows });
   });
 });
 
-app.get('/index',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','index.html'))
+app.get('/stock_take',(req,res)=>
+{ res.sendFile(path.join(__dirname,'veiws','stocktake.html'))
+});
+
+
+app.get('/Sign_up',(req,res)=>
+{ res.sendFile(path.join(__dirname,'veiws','signup.html'))
 });
 
 app.post("/create",  upload.single('tomato') ,(req, res) => {
@@ -60,6 +65,17 @@ app.post("/create",  upload.single('tomato') ,(req, res) => {
         if (err) throw err;
         console.log("1 record inserted");
   });
+})
+
+app.post("/create_profile",  upload.single('tomato') ,(req, res) => {
+  res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
+  let firstname = (`${req.body.product}`)
+  let lastname = (`${req.body.description}`)
+  sql = "INSERT INTO profiles (first_name, last_name, img) VALUES ('"+firstname+"', '"+lastname+"', '"+req.file.filename+"')";
+  con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+});
 })
 
 
@@ -77,8 +93,22 @@ app.post('/ID',(req,res)=> {
     ID_value = e[number]
     res.render(__dirname + "/veiws/product.html", {
       yes: ID_value });
+  console.log(ID_value)
   });
 })
+
+
+
+app.get('/*', (req,res) => {
+    res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
+});
+
+const url = 'https://www.webmound.com/uploads/26/banner.jpg';
+
+
+app.listen(PORT, () => console.log('server is running'));
+
+
 
 
 
