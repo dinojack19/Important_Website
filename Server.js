@@ -52,7 +52,7 @@ app.get('/stock_take',(req,res)=>
 });
 
 
-app.get('/Sign_up',(req,res)=>
+app.get('/signup',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','signup.html'))
 });
 
@@ -69,8 +69,8 @@ app.post("/create",  upload.single('tomato') ,(req, res) => {
 
 app.post("/create_profile",  upload.single('tomato') ,(req, res) => {
   res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
-  let firstname = (`${req.body.product}`)
-  let lastname = (`${req.body.description}`)
+  let firstname = (`${req.body.firstname}`)
+  let lastname = (`${req.body.lastname}`)
   sql = "INSERT INTO profiles (first_name, last_name, img) VALUES ('"+firstname+"', '"+lastname+"', '"+req.file.filename+"')";
   con.query(sql, function (err, result) {
       if (err) throw err;
@@ -96,19 +96,6 @@ app.post('/ID',(req,res)=> {
   console.log(ID_value)
   });
 })
-
-
-
-app.get('/*', (req,res) => {
-    res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
-});
-
-const url = 'https://www.webmound.com/uploads/26/banner.jpg';
-
-
-app.listen(PORT, () => console.log('server is running'));
-
-
 
 
 
