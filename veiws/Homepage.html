@@ -8,14 +8,21 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
       </a>
-      <a href="Product_line" class="btn btn-primary">Products</a>
-      <a href="Product_line" class="btn btn-primary">Go somewhere</a>
-      <a href="Sign_up" class="btn btn-primary">Signup or login</a>
+      <a href="Product_line" class="btn btn-primary" id = "1">Products</a>
+      <a href="Product_line" class="btn btn-primary" id = "2">Go somewhere</a>
+      <a href="signup" class="btn btn-primary" id = "3">Signup or login</a>
   </nav>
 </head>
 <body style="background-color: #9acd32">
     <h1>Welcome to ___ </h1>
     <H2>current sales<H2>
+    <script>
+      if ('Privlage' == admin){
+        document.getElementById('2').style.display = 'none';      
+      }else{
+        document.getElementById('2').style.display = 'block';
+      }
+    </script>
 <body>
 
 </html>
