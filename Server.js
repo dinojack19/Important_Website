@@ -9,6 +9,7 @@ const { error } = require('console');
 var router = express.Router()
 var multer = require('multer');
 var upload = multer({dest:'public/static/'});
+var sessionstorage = require('sessionstorage');
 
 const PORT = process.env.PORT || 3305;
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(logger)
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.engine('html', require('ejs').renderFile);
+
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -78,10 +80,30 @@ app.post("/create_profile",  upload.single('tomato') ,(req, res) => {
 });
 })
 
-
+app.post("/login", (req, res) => {
+  let username = req.body.user_name
+  let password = req.body.Password
+  sql = "SELECT * FROM profiles WHERE first_name = ('"+username+"') AND last_name = ('"+password+"')"
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      let length = (result.length) 
+        if (length == 1 ) {
+          res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
+          sessionstorage.setItem("Hash", result[0].key );
+          sessionstorage.setItem("Privlage" ,result[0].Admin );
+        }else{
+          res.sendFile(path.join(__dirname,'veiws','login.html'))
+        };
+    })
+})
 
 app.get('/',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
+});
+
+
+app.get('/3',(req,res)=>
+{ res.sendFile(path.join(__dirname,'veiws','login.html'))
 });
 
 app.post('/ID',(req,res)=> { 
@@ -102,8 +124,6 @@ app.post('/ID',(req,res)=> {
 app.get('/*', (req,res) => {
     res.status(404).sendFile((path.join(__dirname,'veiws','404.html')))
 });
-
-const url = 'https://www.webmound.com/uploads/26/banner.jpg';
 
 
 app.listen(PORT, () => console.log('server is running'));
