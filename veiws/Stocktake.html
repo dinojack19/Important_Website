@@ -28,7 +28,11 @@
                           <td><form action ="/ID" method ="POST">
                             <button name="shit" value="<%= yes[i].ID%>">Veiw</button>
                           </form></td>
-                          <td>Maria Anders</td>
+                          <td><form action ="/delete" method ="POST">
+                            <input name="shit" value="<%= yes[i].product%>"></input><button name="add" value="<%= yes[i].ID%>">Veiw</button>
+                            <br><input name="add" value="<%= yes[i].desciption%>"></input><button name="add" value="<%= yes[i].ID%>">Veiw</button>
+                            <br><button name="add" value="<%= yes[i].ID%>">-</button><button name="add" value="<%= yes[i].ID%>">Veiw</button><button name="add" value="<%= yes[i].ID%>">+</button>
+                          </form></td>          
                           <td><form action ="/delete" method ="POST">
                             <button name="shit" value="<%= yes[i].ID%>">Delete</button>
                           </form></td>
