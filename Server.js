@@ -49,8 +49,20 @@ app.get('/Product_line', function(req, res)  {
   });
 });
 
-app.get('/stock_take',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','stocktake.html'))
+app.get('/stock_take',(req,res)=>{ 
+  let privlege = sessionstorage.getItem("Privlage");
+  console.log(privlege)
+  //let key = sessionstorage.getItem("Hash");
+  if (privlege == "admin" ) {
+    sql = "SELECT * FROM products" ;
+    con.query(sql, function (err, result, next) {
+      let stocktake = JSON.parse(JSON.stringify(result))  
+      res.render(__dirname + "/veiws/Stocktake.html", {
+        yes: stocktake });
+    })
+  }else{
+    console.log("you done have permision")
+  }
 });
 
 
@@ -100,6 +112,15 @@ app.post("/login", (req, res) => {
 app.get('/',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
 });
+
+app.get('/delete', (req,res)=>{
+  let data = req.body.shit
+  console.log(data)
+  sql="DELETE FROM table_name WHERE condition"
+  console.log(sql)
+  res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
+});
+
 
 
 app.get('/3',(req,res)=>
