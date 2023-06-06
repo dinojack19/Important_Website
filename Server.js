@@ -51,7 +51,6 @@ app.get('/Product_line', function(req, res)  {
 
 app.get('/stock_take',(req,res)=>{ 
   let privlege = sessionstorage.getItem("Privlage");
-  console.log(privlege)
   //let key = sessionstorage.getItem("Hash");
   if (privlege == "admin" ) {
     sql = "SELECT * FROM products" ;
@@ -113,12 +112,13 @@ app.get('/',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
 });
 
-app.get('/delete', (req,res)=>{
+app.post('/delete', (req,res)=>{
   let data = req.body.shit
-  console.log(data)
-  sql="DELETE FROM table_name WHERE condition"
-  console.log(sql)
-  res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
+  sql="DELETE FROM products WHERE ID = ('"+data+"') "
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    res.sendFile(path.join(__dirname,'veiws','homepage.html'))
+  })
 });
 
 
@@ -136,7 +136,6 @@ app.post('/ID',(req,res)=> {
     ID_value = e[number]
     res.render(__dirname + "/veiws/product.html", {
       yes: ID_value });
-  console.log(ID_value)
   });
 })
 
