@@ -12,6 +12,7 @@ var upload = multer({dest:'public/static/'});
 var sessionstorage = require('sessionstorage');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
+const { decode } = require('punycode');
 
 const PORT = process.env.PORT || 3305;
 
@@ -31,21 +32,11 @@ app.engine('html', require('ejs').renderFile);
 dotenv.config();
 process.env.JWT_SECRET_KEY;
 
-function generateAccessToken(username) {
-  return jwt.sign(username, process.env.JWT_SECRET_KEY, { expiresIn: '1800s' });
-}
+
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
-  jwt.verify(token, process.env.TOKEN_SECRET,()  => {
-    if (err) return res.sendStatus(403)
-
-    req.user = user
-
-    next()
-  })
- 
+  var decode = jwt.verify(array.token, process.env.JWT_SECRET_KEY)
+ console.log(decode)
 }
 
 
@@ -71,9 +62,6 @@ app.get('/Product_line', function(req, res)  {
 });
 
 app.get('/stock_take',authenticateToken , (req,res)=>{ 
-  let privlege = sessionstorage.getItem("Privlage");
-  //let key = sessionstorage.getItem("Hash");
-  //if (privlege == "admin" ) {
     sql = "SELECT * FROM products" ;
     con.query(sql, function (err, result, next) {
       let stocktake = JSON.parse(JSON.stringify(result))  
@@ -118,63 +106,22 @@ app.post("/login", (req, res) => {
   let password = req.body.Password
   sql = "SELECT * FROM profiles WHERE first_name = ('"+username+"') AND last_name = ('"+password+"')"
     con.query(sql, function (err, result) {
-      console.log(result)
       if (err) throw err;
       let length = (result.length) 
         if (length <= 1 ) {
-          res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
-          const token = generateAccessToken({ username: result[0].first_name });
-          console.log(token)
+          var token = jwt.sign(result[0].ID ,process.env.JWT_SECRET_KEY);
+          array = {
+            login: true,
+            token: token,
+          };
+          res.sendFile(path.join(__dirname,'veiws','Homepage.html'), array )
+          console.log(decode)
         }else{
           res.sendFile(path.join(__dirname,'veiws','login.html'))
           console.log("wrong")
         };
     })
 })
-
-app.get("/token", (req, res) => {
-
-  let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
-  let jwtSecretKey = process.env.JWT_SECRET_KEY;
-  try {
-      const token = req.header(tokenHeaderKey);
-      const verified = jwt.verify(token, jwtSecretKey);
-      if(verified){
-          return res.send("Successfully Verified");
-      }else{
-          // Access Denied
-          return res.status(401).send(error);
-      }
-  } catch (error) {
-      // Access Denied
-      return res.status(401).send(error);
-  }
-});
-
-app.get('/',(req,res)=>
-{ res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
-});
-
-app.post('/delete', (req,res)=>{
-  let data = req.body.delete
-  sql="DELETE FROM products WHERE ID = ('"+data+"') "
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    res.sendFile(path.join(__dirname,'veiws','homepage.html'))
-  })
-});
-
-app.post('/modify', (req,res)=>{
-  let data = req.body
-  console.log(data)
-  sql="UPDATE products SET Product=('"+req.body.Product+"'), DESCIPTION=('"+req.body.description+"'),QUANTITY=(('"+req.body.quantity+"')) WHERE ID=('"+req.body.ID+"');"
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    res.sendFile(path.join(__dirname,'veiws','homepage.html'))
-  })
-});
-
-
 
 app.get('/3',(req,res)=>
 { res.sendFile(path.join(__dirname,'veiws','login.html'))
@@ -192,6 +139,9 @@ app.post('/ID',(req,res)=> {
   });
 })
 
+app.get('/', (req,res) => {
+  res.status(404).sendFile((path.join(__dirname,'veiws','Homepage.html')))
+});
 
 
 app.get('/*', (req,res) => {
