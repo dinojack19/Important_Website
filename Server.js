@@ -9,7 +9,7 @@ const { error } = require('console');
 var router = express.Router()
 var multer = require('multer');
 var upload = multer({dest:'public/static/'});
-var sessionstorage = require('sessionstorage');
+var sessionStorage = require('sessionstorage');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const { decode } = require('punycode');
@@ -34,9 +34,10 @@ process.env.JWT_SECRET_KEY;
 
 
 
-function authenticateToken(req, res, next) {
-  var decode = jwt.verify(array.token, process.env.JWT_SECRET_KEY)
- console.log(decode)
+var authenticateToken = function() {
+  var a = sessionStorage.getItem("poop")
+  var decode = jwt.verify(a.token, process.env.JWT_SECRET_KEY)
+  return decode   
 }
 
 
@@ -61,7 +62,9 @@ app.get('/Product_line', function(req, res)  {
   });
 });
 
-app.get('/stock_take',authenticateToken , (req,res)=>{ 
+app.get('/stock_take', (req,res)=>{ 
+  var decoded = authenticateToken()
+  console.log(decoded)
     sql = "SELECT * FROM products" ;
     con.query(sql, function (err, result, next) {
       let stocktake = JSON.parse(JSON.stringify(result))  
@@ -114,8 +117,8 @@ app.post("/login", (req, res) => {
             login: true,
             token: token,
           };
-          res.sendFile(path.join(__dirname,'veiws','Homepage.html'), array )
-          console.log(decode)
+          res.sendFile(path.join(__dirname,'veiws','Homepage.html'))
+          sessionStorage.setItem("poop",array)
         }else{
           res.sendFile(path.join(__dirname,'veiws','login.html'))
           console.log("wrong")
