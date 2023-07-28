@@ -4,20 +4,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<nav class="navbar py-4 " style="background-color: #63371e;" >
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-      </a>
-      <a href="Product_line" class="btn btn-primary" id = "1">Products</a>
-      <a href="Product_line" class="btn btn-primary" id = "2">Go somewhere</a>
-      <a href="signup" class="btn btn-primary" id = "3">Signup or login</a>
+  <nav class="navbar " style="background-color: #63371e;" >
+      <a href="Product_line" class="button" id = "1">Products</a>
+      <a href="Product_line" class="button" id = "2">Go somewhere</a>
+      <a href="signup" class="button" id = "3">Signup or login</a>
   </nav>
 </head>
 <body style="background-color: #9acd32">
+  <row>
     <h1>Welcome to ___ </h1>
     <H2>current sales<H2>
-    <script>
-      if ('Privlage' == admin){
+  </row>
+  <div class="row">
+    <img src="static/dogo.jpg" class="img-fluid" alt="Responsive image">
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </row> 
+    <script scr="Server.js">
+      if (yes ==3 ){
         document.getElementById('2').style.display = 'none';      
       }else{
         document.getElementById('2').style.display = 'block';

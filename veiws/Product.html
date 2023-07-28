@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <nav class="navbar navbar-light py-5" style="background-color: #63371e;">
+        <a class="navbar-brand">
+
+        </a>
+    </nav>
+</head>
+
+<body style="background-color: #9acd32">
+    <div class="container-fluid">
+        <div class="row justify-content-around">      
+            <div class="col-lg-1 vh-2 rg-primary"> </div>
+            <div class="col-lg-10 vh-10 "><br></br></div>
+            <div class="col-lg-1 vh-2 rg-primary"> </div>
+
+
+        <div class="row justify-content-around">            
+            <div class="col-lg-1 vh-10 rg-primary"> </div>
+            <div class="col-lg-4 vh-10 rounded-4 " style=" background-color: #7b4425; " >
+                <img src="static/<%= yes.img%>" alt="" width="200" height="100" class="d-inline-block align-text-top">     
+            </div>
+            <div class="col-lg-1 vh-10 rg-primary"> </div>
+            <div class="col-lg-5 vh-10 rounded-4" style=" background-color: #7b4425; ">  
+               <h2> <%= yes.product%></h2><br><h4><%= yes.desciption %></h4>
+            </div>
+            <form action = "/buy" method = "post" >
+                <input type="submit" name= "item" value="<%= yes.ID%>"></input>
+            <form>
+            <div class="col-lg-1 vh-10 rg-primary"> </div>'      
+        </div>
+    </div>
+    <script>
+    </script>
+</body>
+</html>

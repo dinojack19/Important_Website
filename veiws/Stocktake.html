@@ -52,12 +52,13 @@
                         <button name="shit" value="<%= yes[i].ID%>">Veiw</button>
                       </form></td>
                       <td><form action ="/modify" method ="POST">
-                        <input name="shit" value="<%= yes[i].product%>"></input><button name="add" value="<%= yes[i].ID%>">Veiw</button>
-                        <br><input name="add" value="<%= yes[i].desciption%>"></input><button name="add" value="<%= yes[i].ID%>">Veiw</button>
-                        <br><button name="add" value="<%= yes[i].ID%>">-</button><button name="add" value="<%= yes[i].ID%>">Veiw</button><button name="add" value="<%= yes[i].ID%>">+</button>
+                          <input name="Product" data-value="<%=yes[i].ID%>" value="<%= yes[i].product%>"></input>
+                          <br><input name="description" value="<%= yes[i].desciption%>"></input>
+                          <br><button name="quantity">-</button><input name="quantity" value="<%= yes[i].quantity%>"></input><button name="add">+</button>
+                          <br><button  type="submit" name="ID" value="<%=yes[i].ID%>">Submit</button>
                       </form></td>          
                       <td><form action ="/delete" method ="POST">
-                        <button name="shit" value="<%= yes[i].ID%>">Delete</button>
+                        <button name="delete" value="<%= yes[i].ID%>">Delete</button>
                       </form></td>
                     </tr>
                   </table>
@@ -70,6 +71,7 @@
             </div>
         </div>
     </div>
+
 </body>
 <html>
 
