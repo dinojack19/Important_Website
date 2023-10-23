@@ -1,60 +1,166 @@
-<link rel="stylesheet" href="css/style.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <!DOCTYPE html>
-<html>
-<head>
-  <nav class="navbar " style="background-color: #63371e;" >
-      <a href="Product_line" class="button" id = "1">Products</a>
-      <a href="Product_line" class="button" id = "2">Go somewhere</a>
-      <a href="signup" class="button" id = "3">Signup or login</a>
-  </nav>
+<!-- saved from url=(0022)http://localhost:3305/ -->
+<html><head>
+<link href="css/style.css" rel="stylesheet" >
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
 </head>
-<body style="background-color: #9acd32">
-  <row>
-    <h1>Welcome to ___ </h1>
-    <H2>current sales<H2>
-  </row>
-  <div class="row">
-    <img src="static/dogo.jpg" class="img-fluid" alt="Responsive image">
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  </row> 
-    <script scr="Server.js">
-      if (yes ==3 ){
-        document.getElementById('2').style.display = 'none';      
-      }else{
-        document.getElementById('2').style.display = 'block';
-      }
-    </script>
-<body>
 
-</html>
+<body style="background-color:#b5651d" >
+  <nav class="ad">
+    <form action ="/" method ="GET" class="o">
+      <button href="http://localhost:3305/Product_line" type="submit"class="button" id="1">Products</a>
+    </form>
+    <form action ="/" method ="GET">
+      <button href="http://localhost:3305/Product_line"type="submit" class="button" id="1"></a>
+        <img src="static/-hiiiii.jpeg" alt="..." style="width:45%; height:95%">
+    </form>
+    <form action ="/Product_line" method ="GET">
+      <button href="http://localhost:3305/Product_line"type="submit" class="button" id="1">Products</a>
+    </form>
+    <form action ="/Stock_take_1" method ="GET">
+      <button href="http://localhost:3305/Product_line" class="button" id="stock">&times; Stocktake</a>
+    </form>
+    <form action ="/signup" method ="get">
+      <button href="http://localhost:3305/signup" class="button" id="sign">Signup</a>
+    </form>
+    <form action ="/login" method ="get">
+      <button href="http://localhost:3305/signup" class="button" id="login">login</a>
+    </form>
+      <button class="button" id="welcome" onclick="openModal()">Your Shoping cart</button>
+      <button class="button" > welcome <%= data.first_name%></button>
+
+  </nav>
+  <div id="modal" class="modal" >
+    <div class="e">
+      <%= e %>
+    </div>
+  </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content" ID="modal_content">
+        <span id="idValue"></span>
+      <button class="close" onclick="closeModal()">&times;</button>
+    </div>
+  </div>
+    <div class="e">
+      <img src="static/-hiiiii.jpeg" alt="..." >
+    </div>
+    <div  style="text-align:center; margin:30px">
+      <h1>Welcome to ___ </h1>
+      <h2>current sales</h2><h2>
+    </div><br>
+    <div class="wads"> 
+      <div class="efidsjk">
+        <div class="card con" style="background-color:#b5651d">
+          <div class="container">
+            <img src="static/lead.jpg" alt="..." class = "image" >        
+          </div>
+        </div>
+      </div>
+      <div class="efidsjk">
+        <div class="card con" style="background-color:#b5651d">
+          <div class="container">
+            <img src="static/colar.jpg" alt="..." class = "image" >        
+          </div>
+        </div>
+      </div>
+      <div class="efidsjk">
+        <div class="card con" style="background-color:#b5651d">
+          <div class="container">
+            <img src="static/bowl.jpg" alt="..." class = "image" >        
+          </div>
+        </div>
+      </div>
+      <div class="efidsjk">
+        <div class="card con" style="background-color:#b5651d">
+          <div class="container">
+            <img src="static/mat.jpg" alt="..." class = "image" >        
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function openModal() {
+        var value = 1
+        const response = fetch('/items') 
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();  
+        })
+        .then(data => {
+          console.log(data); 
+          const idElement = document.getElementById('idValue');
+          modal = document.getElementById('modal_content')
+          data.forEach(item => {
+            const itemElement = document.createElement('div');
+            const image = document.createElement('img');
+            const button = document.createElement("button");
+            button.id =  `${item.id} ` ;
+            button.innerText = "remove";
+            button.onclick = click;
+            image.src = `static/${item.img_fiel}` ;
+            itemElement.textContent = `Product ID: ${item.id}, quantity:${item.Quantity}`; 
+            modal.appendChild(itemElement);
+            modal.appendChild(image);
+            modal.appendChild(button);
+
+          });
+          document.getElementById('myModal').style.display = 'block'; })
+        
+        .catch(error => {
+          console.error('Error fetching items:', error);
+          alert('An error occurred while fetching items. Please try again later.');
+        });
+      }
+
+      function closeModal() {
+        document.getElementById('myModal').style.display = 'none'; 
+      }
+
+      var condition = "<%= data.first_name%>" 
+      console.log(condition)
+      var myElement = document.getElementById('stock');
+      var w = document.getElementById('welcome');
+      var l = document.getElementById('login');
+      var s = document.getElementById('sign');
+      if (condition && condition.trim() !== '' ) {
+        myElement.style.display = 'block';
+        l.style.display = 'none';
+        s.style.display = 'none';
+      } else {
+        myElement.style.display = 'none';
+        w.style.display = 'none'
+       
+
+      }
+
+      function click(){
+        closeModal()
+        var  responst = fetch('/delete_items') 
+        .then(responst => {
+          if (!responst.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return responst.json();  
+        })
+        .then(data => {
+          console.log("poopie")
+          
+        })
+        .catch(error => {
+          console.error('Error fetching items:', error);
+          alert('An error occurred while fetching items. Please try again later.');
+        }); 
+      }
+
+
+        console.log("POOP")
+        app.post 
+      
+    
+    </script>
+
+</h2></body></html>
